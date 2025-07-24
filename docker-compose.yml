@@ -1,0 +1,30 @@
+services:
+  rag-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist vector store data
+      - ./vectorstore:/app/vectorstore
+      # Mount source directories
+      - ./docs:/app/docs:ro
+      - ./src:/app/src:ro
+      # Mount logs (optional)
+      - ./logs:/app/logs
+    environment:
+      - PYTHONPATH=/app
+    env_file:
+      - app/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  vectorstore:
+    driver: local

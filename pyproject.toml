@@ -1,0 +1,16 @@
+[project]
+name = "rag"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "chromadb>=1.0.15",
+    "dotenv>=0.9.9",
+    "fastapi[standard]>=0.116.1",
+    "langchain>=0.3.26",
+    "llama-index>=0.12.49",
+    "llama-index-vector-stores-chroma>=0.4.2",
+    "logging>=0.4.9.6",
+    "python-dotenv>=1.1.1",
+]
